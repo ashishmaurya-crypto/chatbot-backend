@@ -3,7 +3,7 @@ const users = require('./../models/users_model');
 
 const getUsers = async (req, res, next) => {
     // console.log('=====request', req)
-    // console.log('=====request', req)
+    console.log('=====request', req)
     try {
         const result = await users.find({}).exec();
         // console.log('sent user details', result);
