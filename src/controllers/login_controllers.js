@@ -12,7 +12,7 @@ passport.use('login', new LocalStrategy(
     },
     async (username, password, done) => {
         try {
-            console.log('hellllo-----------')
+            // console.log('hellllo-----------')
             const isEmail = isValidEmail((username.toString()));
             const isPhoneNumber = isValidPhoneNumber((username).toString());
 
@@ -26,7 +26,7 @@ passport.use('login', new LocalStrategy(
 
             // const user = await users_model.findOne({email : username});
 
-            console.log('db-user', user)
+            // console.log('db-user', user)
             if(!user){
                 return done(null, false, { success: false, error: 'User not found' })
             }

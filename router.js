@@ -17,7 +17,7 @@ passport.use(
         async (token, done) => {
             try {
                 // console.log('====token', token.user)
-                const user = await users_model.findOne({ _id: token.user._id, isActive : true, isDeleted : false }); // Use the email from the token
+                const user = await users_model.findOne({ _id: token.user._id, isActive: true, isDeleted: false }); // Use the email from the token
                 // console.log('====user from token', user)
                 if (!user) {
                     // console.log('====tokennn--user--call')
@@ -31,7 +31,22 @@ passport.use(
     )
 )
 
-const tokenAuth = passport.authenticate('jwt', { session: false })
+const tokenAuth = (req, res, next) => {
+    passport.authenticate('jwt', { session: false }, (err, user, info) => {
+        if (err) {
+            return next(err);
+        }
+        if (!user) {
+            if (info.name === 'TokenExpiredError') {
+                return res.status(401).json({ success: false, error: 'Session has expired. Login again please' })
+            } else {
+                return res.status(401).json(info); // Return the specific error message
+            }
+        }
+        req.user = user;
+        next();
+    })(req, res, next);
+};
 
 // Define your routes here
 router.get("/", (req, res) => {
