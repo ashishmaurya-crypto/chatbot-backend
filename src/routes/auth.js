@@ -2,7 +2,7 @@ const express = require('express');
 const authRouter = express.Router();
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
-const { findMissingFields } = require('./../services/functions')
+const { findMissingFields } = require('../services/Helpers')
 // const { requestInterceptor, checkSessions } = require('../middelware/interceptor')
 
 //controllers
@@ -22,7 +22,7 @@ const loginStrategy = async (req, res, next) => {
                 if (err || !user) {
                     // const error = new Error('An error occurred.');
                     // console.log('error=====', err, user, info)
-                    return res.status(500).json(info);
+                    return res.status(500).json({ success: false, ...info });
                 }
 
                 req.login(

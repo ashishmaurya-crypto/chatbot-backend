@@ -1,7 +1,7 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const users_model = require('./../models/users_model');
-const {isValidEmail, isValidPhoneNumber} = require('./../services/functions')
+const {isValidEmail, isValidPhoneNumber} = require('../services/Helpers')
 
 
 

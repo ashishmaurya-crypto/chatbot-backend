@@ -18,7 +18,7 @@ passport.use(
             try {
                 // console.log('====token', token.user)
                 const user = await users_model.findOne({ _id: token.user._id, isActive: true, isDeleted: false }); // Use the email from the token
-                // console.log('====user from token', user)
+                console.log('====user from token', user)
                 if (!user) {
                     // console.log('====tokennn--user--call')
                     return done(null, false, { success: false, error: 'User not found' });
@@ -43,7 +43,7 @@ const tokenAuth = (req, res, next) => {
                 return res.status(401).json(info); // Return the specific error message
             }
         }
-        req.user = user;
+        req.userDetail = user;
         next();
     })(req, res, next);
 };
