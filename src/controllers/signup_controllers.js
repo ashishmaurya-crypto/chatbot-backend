@@ -1,4 +1,5 @@
 const users = require("./../models/users_model");
+const contact = require('./../models/contact_model');
 const passport = require('passport');
 const mongoose = require('mongoose');
 const localStrategy = require('passport-local').Strategy;
@@ -14,14 +15,19 @@ passport.use('signup', new localStrategy(
     passReqToCallback: true
   }, async (req, email, password, done) => {
     try {
-      
-      const { userName, confirmPassword, phoneNumber, age, gender, country, state, city } = req.body;
 
-      const user = await users.create({...req.body});
-      return done(null, { success: true, message: 'user created successfully', user: user });
+      // const { userName, confirmPassword, phoneNumber, age, gender, country, state, city } = req.body;
 
+      const user = await users.create({ ...req.body });
+      // console.log('users===>', user);
+      if (user._id) {
+        await contact.create({
+          user: user._id,
+        });
+        return done(null, { success: true, message: 'user created successfully', user: user });
+      }
     } catch (error) {
-      
+      console.error('Full Validation Error:', error);
       // Check if the error is a MongoDB duplicate key error
       if (error instanceof mongoose.Error.ValidationError) {
         // Handle Mongoose validation error (e.g., missing required fields)

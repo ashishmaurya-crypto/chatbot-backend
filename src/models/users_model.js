@@ -13,8 +13,8 @@ const userSchema = new mongoose.Schema({
     country: { type: String, required: true, trim: true },
     state: { type: String, required: true, trim: true },
     city: { type: String, required: true, trim: true },
-    isActive: { type: Boolean, required: true, trim: true , default : true},
-    isDeleted: { type: Boolean, required: true, trim: true, default : false },
+    isActive: { type: Boolean, trim: true , default : true},
+    isDeleted: { type: Boolean, trim: true, default : false },
 }, { timestamps: true })
 
 

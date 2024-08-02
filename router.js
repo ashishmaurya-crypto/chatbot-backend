@@ -18,7 +18,7 @@ passport.use(
             try {
                 // console.log('====token', token.user)
                 const user = await users_model.findOne({ _id: token.user._id, isActive: true, isDeleted: false }); // Use the email from the token
-                console.log('====user from token', user)
+                console.log('====get user from token')
                 if (!user) {
                     // console.log('====tokennn--user--call')
                     return done(null, false, { success: false, error: 'User not found' });
