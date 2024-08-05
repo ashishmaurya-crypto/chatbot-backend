@@ -4,6 +4,7 @@ const passport = require('passport');
 const JWTstrategy = require('passport-jwt').Strategy;
 const ExtractJWT = require('passport-jwt').ExtractJwt;
 const userRouter = require('./src/routes/users');
+const messagesRouter = require('./src/routes/messages');
 const authRouter = require('./src/routes/auth');
 const users_model = require('./src/models/users_model');
 
@@ -54,6 +55,8 @@ router.get("/", (req, res) => {
 });
 router.use("/auth", authRouter);
 router.use('/users', tokenAuth, userRouter);
+router.use('/messages', tokenAuth, messagesRouter);
+
 
 
 

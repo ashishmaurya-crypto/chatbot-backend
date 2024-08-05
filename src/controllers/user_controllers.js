@@ -12,9 +12,9 @@ const getUserDetail = async (req, res, next) => {
             _id: userDetail._id,
             isActive: true,
             isDeleted: false
-        }).exec();
+        },'_id userName email phoneNumber gender age city state country').exec();
         // console.log('sent user details', result);
-        res.send(result);
+        res.send(result[0]);
     } catch (error) {
         // Handle errors here
         console.error('Error fetching user details:', error);
