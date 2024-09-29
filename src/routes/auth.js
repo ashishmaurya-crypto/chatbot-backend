@@ -38,7 +38,7 @@ const loginStrategy = async (req, res, next) => {
                     }
                 );
             } catch (error) {
-                return res.status(500).json({ success: false, error });
+                return res.status(500).json({ success: false, error : error });
             }
         }
     )(req, res, next);
